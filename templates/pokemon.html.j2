@@ -1,0 +1,53 @@
+{% extends 'base.html.j2' %}
+{% block title %}
+Pokemon
+{% endblock %}
+
+{% block content %}
+
+<h1>Pokemon Information</h1>
+<form action="{{url_for('pokemon')}}" method="POST">
+{{ form.hidden_tag()}}
+<div>
+{{form.pokename.label (class = "form-label")}}
+{{form.pokename(class = "form-control")}}
+</div>
+<br>
+      
+      {#<div class="mb-3">
+        <label for="poke" class="form-label">Pokemon Name</label>
+        <input type="text" name="poke" class="form-control" id="poke">
+      </div>#}
+<div>
+{{form.submit(class="btn btn-primary form-control")}}
+</div>
+</form>
+{% if poke %}
+
+  <table class="table table-striped table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Pokemon Name</th>
+        <th scope="col">Attack Base</th>
+        <th scope="col">HP Base</th>
+        <th scope="col">Defense Base</th>
+        <th scope="col">Ability</th>
+        <th scope="col">Base Experience</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{poke['poke_name']}}</th>
+        <td>{{poke.attack_base_stat}}</td>
+        <td>{{poke.hp_base_stat}}</td>
+        <td>{{poke.defense_base_stat}}</td>
+        <td>{{poke.ability_name}}</td>
+        <td>{{poke.base_experience}}</td>
+        <td><img src={{poke.front_shiny}}></td>
+      </tr>
+    </tbody>
+  </table>
+{% endif %}
+Write a Pokemon name:
+{% endblock %}
